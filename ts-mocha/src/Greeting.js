@@ -15,7 +15,7 @@ class Greeting {
 
   hello() {
     if (this.name === 'Harold')
-      return 'Welcome, magic man!'
+      return 'Welcome, dude!'
       
     return `Welcome, ${this.name}!`;
   }
