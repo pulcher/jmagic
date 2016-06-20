@@ -10,10 +10,25 @@
 import { expect } from 'chai';
 import Greeting from '../src/Greeting';
 
-/*
 describe('Greeting', () => {
 
-  describe('greeting.hello()', () => {
+    describe('greeting.hello()', () => {
+
+    before(function() {
+      this.attempts = 2;
+    });
+
+    after(function() {
+      expect(this.attempts).to.be.equal(0);
+    });
+
+    beforeEach(function() {
+      this.attempts--;
+    });
+
+    afterEach(function() {
+      // runs after each test in this block
+    });
 
     it('should return welcome message for a guest user', () => {
       const greeting = new Greeting();
@@ -30,5 +45,4 @@ describe('Greeting', () => {
   });
 
 });
-*/
 
