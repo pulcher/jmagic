@@ -14,23 +14,23 @@ describe('Greeting', () => {
 
     describe('greeting.hello()', () => {
 
-    before(function() {
-      this.attempts = 2;
-    });
+    // before(function() {
+    //   this.attempts = 2;
+    // });
 
-    after(function() {
-      expect(this.attempts).to.be.equal(0);
-    });
+    // after(function() {
+    //   expect(this.attempts).to.be.equal(0);
+    // });
 
-    beforeEach(function() {
-      this.attempts--;
-    });
+    // beforeEach(function() {
+    //   this.attempts--;
+    // });
 
-    afterEach(function() {
-      // runs after each test in this block
-    });
+    // afterEach(function() {
+    //   // runs after each test in this block
+    // });
 
-    it('should return welcome message for a guest user', () => {
+    it.only('should return welcome message for a guest user', () => {
       const greeting = new Greeting();
       const message = greeting.hello();
       expect(message).to.be.equal('Welcome, Guest!');
@@ -43,6 +43,5 @@ describe('Greeting', () => {
     });
 
   });
-
 });
 
