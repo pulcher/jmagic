@@ -6,5 +6,10 @@
   },
   "scripts": {
     "install": "node ./node_modules/protractor/bin/webdriver-manager update"
+  },
+  "dependencies": {
+    "jasmine-spec-reporter": "^2.5.0",
+    "karma": "^0.13.22",
+    "karma-spec-reporter": "0.0.26"
   }
 }

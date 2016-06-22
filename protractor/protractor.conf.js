@@ -12,12 +12,12 @@ exports.config = {
     'browserName': 'chrome'
   }],
 
-
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
   baseUrl: 'http://localhost:8000',
 
   jasmineNodeOpts: {
+    //customReporters: [reporter],
     onComplete: null,
     isVerbose: false,
     showColors: true,
