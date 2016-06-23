@@ -1,39 +1,60 @@
 'use strict';
 
-describe('angularjs homepage', function() {
-  it('should greet the named user', function() {
-    browser.get('http://www.angularjs.org');
+describe('Super calc app', function() {
+  var firstNumber = element(by.model('first'));
+  var secondNumber = element(by.model('second'));
+  var goButton = element(by.id('gobutton'));
+  var latestResult = element(by.binding('latest'));
+  var history = element.all(by.repeater('result in memory'));
 
-    element(by.model('yourName')).sendKeys('Julie');
+  function add(a, b) {
+    firstNumber.sendKeys(a);
+    secondNumber.sendKeys(b);
+    goButton.click();
+  }
 
-    var greeting = element(by.binding('yourName'));
-
-    expect(greeting.getText()).toEqual('Hello Julie!');
+  beforeEach(function() {
+    browser.get('http://juliemr.github.io/protractor-demo/');
   });
 
-  describe('todo list', function() {
-    var todoList;
+  it('should have a title', function() {
+    expect(browser.getTitle()).toEqual('Super Calculator');
+  });
 
-    beforeEach(function() {
-      browser.get('http://www.angularjs.org');
+  it('should add one and two', function() {
+    firstNumber.sendKeys(1);
+    secondNumber.sendKeys(2);
 
-      todoList = element.all(by.repeater('todo in todoList.todos'));
-    });
+    goButton.click();
 
-    it('should list todos', function() {
-      expect(todoList.count()).toEqual(2);
-      expect(todoList.get(1).getText()).toEqual('build an angular app');
-    });
+    expect(latestResult.getText()).toEqual('3');
+  });
 
-    it('should add a todo', function() {
-      var addTodo = element(by.model('todoList.todoText'));
-      var addButton = element(by.css('[value="add"]'));
+  it('should add four and six', function() {
+    firstNumber.sendKeys(6);
+    secondNumber.sendKeys(4);
 
-      addTodo.sendKeys('write a protractor test');
-      addButton.click();
+    goButton.click();
 
-      expect(todoList.count()).toEqual(3);
-      expect(todoList.get(2).getText()).toEqual('write a protractor test');
-    });
+    expect(latestResult.getText()).toEqual('10');
+  });
+
+  it('should have a history', function() {
+    add(1, 2);
+    add(3, 4);
+
+    expect(history.count()).toEqual(2);
+
+    add(5, 6);
+
+    expect(history.count()).toEqual(3);
+  });
+
+  it('should have a history in reverse order', function() {
+    add(1, 2);
+    add(3, 4);
+
+    expect(history.last().getText()).toContain('1 + 2');
+    expect(history.first().getText()).toContain('3 + 4');
   });
 });
