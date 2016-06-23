@@ -14,23 +14,23 @@ describe('Greeting', () => {
 
     describe('greeting.hello()', () => {
 
-    // before(function() {
-    //   this.attempts = 2;
-    // });
+    before(function() {
+      this.attempts = 2;
+    });
 
-    // after(function() {
-    //   expect(this.attempts).to.be.equal(0);
-    // });
+    after(function() {
+      expect(this.attempts).to.be.equal(0);
+    });
 
-    // beforeEach(function() {
-    //   this.attempts--;
-    // });
+    beforeEach(function() {
+      this.attempts--;
+    });
 
-    // afterEach(function() {
-    //   // runs after each test in this block
-    // });
+    afterEach(function() {
+      // runs after each test in this block
+    });
 
-    it.only('should return welcome message for a guest user', () => {
+    it('should return welcome message for a guest user', () => {
       const greeting = new Greeting();
       const message = greeting.hello();
       expect(message).to.be.equal('Welcome, Guest!');
@@ -42,6 +42,19 @@ describe('Greeting', () => {
       expect(message).to.be.equal('Welcome, John!');
     });
 
+    var tests = [
+      {arg: 'Bill',     expected: 'Welcome, Bill!'},
+      {arg: 'Jennifer', expected: 'Welcome, Jennifer!'},
+      {arg: 'Harold',   expected: 'Welcome, magic man!'}
+    ];
+
+    tests.forEach(function(test) {
+      it('should return welcome message for ' + test.arg, () => {
+        const greeting = new Greeting(test.arg);
+        const message = greeting.hello();
+        expect(message).to.be.equal(test.expected);
+      });
+    });
   });
 });
 
